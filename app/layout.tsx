@@ -1,73 +1,54 @@
 import type { Metadata } from "next";
-import { Fraunces, Lora } from "next/font/google";
+import { Cormorant_Garamond, Outfit, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site";
+import { site, projects } from "@/lib/site-content";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const display = Cormorant_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
-  axes: ["SOFT", "WONK"],
+  weight: ["500", "600", "700"],
 });
 
-const lora = Lora({
-  variable: "--font-lora",
+const body = Outfit({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 
-const linkedIn = "https://www.linkedin.com/in/georgie-webb-0106a254/";
+const mono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+});
+
 const siteUrl = getSiteUrl();
 
-const siteDescription =
-  "Portfolio of Georgie Webb: AI bootcamp projects spanning semantic HTML, Next.js with PostgreSQL and Prisma, Python automation and games, AI agents, Chrome extensions, and deployment with marketing. Full-stack developer focused on practical, shipped software.";
+const description = `${site.name} — ${site.role}. Portfolio and selected projects.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Georgie Webb · Developer portfolio · AI, full-stack & shipping",
-    template: "%s · Georgie Webb",
+    default: `${site.name} · ${site.role}`,
+    template: `%s · ${site.name}`,
   },
-  description: siteDescription,
-  keywords: [
-    "Georgie Webb",
-    "portfolio",
-    "full-stack developer",
-    "Next.js",
-    "PostgreSQL",
-    "Prisma",
-    "Python",
-    "AI agents",
-    "Chrome extension",
-    "deployment",
-    "SEO",
-    "AI bootcamp",
-    "web development",
-  ],
-  authors: [{ name: "Georgie Webb", url: linkedIn }],
-  creator: "Georgie Webb",
+  description,
+  authors: [{ name: site.name, url: site.linkedIn }],
   openGraph: {
     type: "website",
     locale: "en_GB",
     url: siteUrl,
-    siteName: "Georgie Webb — Portfolio",
-    title: "Georgie Webb · Frida folk–modern portfolio",
-    description:
-      "Six weeks of shipped work: HTML foundations, AI note-taking (Next.js + Postgres + Prisma), Python automation & games, AI agents, Chrome extensions, deployment & marketing.",
+    siteName: `${site.name} — Portfolio`,
+    title: `${site.name} · ${site.role}`,
+    description,
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Georgie Webb · Developer portfolio",
-    description:
-      "Full-stack and AI portfolio: Next.js, PostgreSQL, Prisma, Python, agents, extensions, go-to-market.",
+    card: "summary",
+    title: `${site.name} · ${site.role}`,
+    description,
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  alternates: {
-    canonical: siteUrl,
-  },
-  category: "technology",
+  robots: { index: true, follow: true },
+  alternates: { canonical: siteUrl },
 };
 
 const jsonLd = {
@@ -77,70 +58,29 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
-      name: "Georgie Webb — Portfolio",
-      description: siteDescription,
+      name: `${site.name} — Portfolio`,
+      description,
       inLanguage: "en-GB",
       publisher: { "@id": `${siteUrl}/#person` },
     },
     {
       "@type": "Person",
       "@id": `${siteUrl}/#person`,
-      name: "Georgie Webb",
+      name: site.name,
       url: siteUrl,
-      sameAs: [linkedIn],
-      jobTitle: "Developer",
-      knowsAbout: [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "TypeScript",
-        "React",
-        "Next.js",
-        "PostgreSQL",
-        "Prisma",
-        "Python",
-        "AI agents",
-        "Browser extensions",
-        "DevOps",
-        "Digital marketing",
-      ],
+      jobTitle: site.role,
+      sameAs: [site.linkedIn, ...(site.github ? [site.github] : [])].filter(Boolean),
     },
     {
       "@type": "ItemList",
       "@id": `${siteUrl}/#projects`,
-      name: "Highlighted bootcamp projects",
-      itemListElement: [
-        {
-          "@type": "ListItem",
-          position: 1,
-          name: "Week 1 — HTML projects across five categories",
-        },
-        {
-          "@type": "ListItem",
-          position: 2,
-          name: "Week 2 — AI note-taking full stack (Next.js, PostgreSQL, Prisma)",
-        },
-        {
-          "@type": "ListItem",
-          position: 3,
-          name: "Week 3 — Python automation and games",
-        },
-        {
-          "@type": "ListItem",
-          position: 4,
-          name: "Week 4 — AI agents",
-        },
-        {
-          "@type": "ListItem",
-          position: 5,
-          name: "Week 5 — Chrome extensions",
-        },
-        {
-          "@type": "ListItem",
-          position: 6,
-          name: "Week 6 — Deployment and marketing",
-        },
-      ],
+      name: "Selected projects",
+      itemListElement: projects.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: p.title,
+        ...(p.href && p.href !== "#" ? { url: p.href } : {}),
+      })),
     },
   ],
 };
@@ -153,9 +93,9 @@ export default function RootLayout({
   return (
     <html
       lang="en-GB"
-      className={`${fraunces.variable} ${lora.variable} h-full antialiased`}
+      className={`${display.variable} ${body.variable} ${mono.variable} h-full antialiased`}
     >
-      <body className="relative min-h-full overflow-x-hidden bg-frida">
+      <body className="relative min-h-full overflow-x-hidden bg-site">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

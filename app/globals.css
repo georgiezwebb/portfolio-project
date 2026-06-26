@@ -1,30 +1,29 @@
 @import "tailwindcss";
 
-/* Frida Kahlo–inspired folk palette: plaster walls, jungle teal, crimson rebozo, gold ochre, cobalt accents */
 :root {
-  --cream: #fffdf9;
-  --plaster: #f5ebe0;
-  --ink: #2c1810;
-  --muted: #6b5347;
-  --crimson: #b4233a;
-  --magenta: #8b1d4e;
-  --jungle: #0f5c4a;
-  --jungle-light: #1a7a63;
-  --cobalt: #1a4d7a;
-  --ochre: #b8732d;
-  --gold: #c9a227;
-  --panel: rgba(255, 253, 248, 0.88);
-  --border: rgba(44, 24, 16, 0.14);
-  --font-fraunces: ui-serif, Georgia, serif;
-  --font-lora: ui-serif, Georgia, serif;
-  --background: var(--plaster);
+  --paper: #f9f7f5;
+  --surface: #fffcfa;
+  --ink: #1c1524;
+  --ink-soft: #3d3548;
+  --muted: #7a7284;
+  --rose: #e4a4b4;
+  --rose-deep: #c76b8a;
+  --plum: #4a2f4f;
+  --accent: #0d9488;
+  --accent-dim: rgba(13, 148, 136, 0.35);
+  --line: rgba(28, 21, 36, 0.1);
+  --glow: rgba(228, 164, 180, 0.45);
+  --font-display: ui-serif, Georgia, serif;
+  --font-body: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --background: var(--paper);
   --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-lora);
+  --font-sans: var(--font-body);
 }
 
 html {
@@ -32,39 +31,52 @@ html {
 }
 
 body {
-  background: var(--plaster);
+  background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-lora), ui-serif, Georgia, serif;
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 }
 
 .font-display {
-  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-family: var(--font-display), ui-serif, Georgia, serif;
 }
 
-/* Warm plaster, botanical wash, papel-style micro-pattern */
-.bg-frida {
-  background-color: var(--plaster);
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+.bg-site {
+  background-color: var(--paper);
   background-image:
-    radial-gradient(ellipse 100% 70% at 0% 0%, rgba(196, 162, 39, 0.12), transparent 50%),
-    radial-gradient(ellipse 80% 60% at 100% 15%, rgba(180, 35, 58, 0.08), transparent 45%),
-    radial-gradient(ellipse 90% 50% at 50% 100%, rgba(15, 92, 74, 0.1), transparent 50%),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M30 30c0-4 3-8 6-8s6 4 6 8-3 8-6 8-6-4-6-8z' fill='%23b4233a' fill-opacity='.04'/%3E%3Cpath d='M10 10l4 4m32 32l4 4M46 10l-4 4M14 46l-4 4' stroke='%230f5c4a' stroke-opacity='.07' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+    radial-gradient(ellipse 70% 50% at 100% 0%, var(--glow), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, rgba(13, 148, 136, 0.08), transparent 50%);
 }
 
 .grain {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 50;
-  opacity: 0.09;
+  z-index: 40;
+  opacity: 0.04;
   mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-@keyframes rise {
+.hero-mark {
+  position: absolute;
+  right: -8%;
+  top: 10%;
+  width: min(42vw, 320px);
+  height: min(42vw, 320px);
+  border-radius: 40% 60% 55% 45% / 48% 42% 58% 52%;
+  background: linear-gradient(135deg, var(--rose) 0%, rgba(13, 148, 136, 0.35) 100%);
+  opacity: 0.55;
+  filter: blur(1px);
+}
+
+@keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -72,44 +84,19 @@ body {
   }
 }
 
-@keyframes warm-bloom {
-  0%,
-  100% {
-    box-shadow: 0 12px 40px rgba(44, 24, 16, 0.08);
-  }
-  50% {
-    box-shadow:
-      0 12px 40px rgba(44, 24, 16, 0.1),
-      0 0 0 1px rgba(180, 35, 58, 0.15);
-  }
-}
-
-.animate-rise {
-  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+.reveal {
+  animation: fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   opacity: 0;
 }
 
-.delay-1 {
-  animation-delay: 0.08s;
+.reveal-1 {
+  animation-delay: 0.05s;
 }
-.delay-2 {
-  animation-delay: 0.16s;
+.reveal-2 {
+  animation-delay: 0.12s;
 }
-.delay-3 {
-  animation-delay: 0.24s;
-}
-.delay-4 {
-  animation-delay: 0.32s;
-}
-.delay-5 {
-  animation-delay: 0.4s;
-}
-.delay-6 {
-  animation-delay: 0.48s;
-}
-
-.card-frida:hover {
-  animation: warm-bloom 3s ease-in-out infinite;
+.reveal-3 {
+  animation-delay: 0.2s;
 }
 
 .skip-link {
@@ -117,32 +104,24 @@ body {
   left: 1rem;
   top: 1rem;
   z-index: 100;
-  border-radius: 0.25rem;
-  padding: 0.5rem 0.9rem;
+  border-radius: 0.375rem;
+  padding: 0.5rem 0.875rem;
   font-size: 0.875rem;
-  font-weight: 600;
-  background: var(--gold);
-  color: var(--ink);
+  font-weight: 500;
+  background: var(--ink);
+  color: var(--surface);
   transform: translateY(-160%);
-  transition: transform 0.2s ease;
+  transition: transform 0.15s ease;
 }
 
 .skip-link:focus {
   transform: translateY(0);
-  outline: 2px solid var(--crimson);
-  outline-offset: 4px;
-}
-
-/* Portrait-worthy headline: warm depth, folk intensity */
-.hero-frida {
-  color: var(--ink);
-  text-shadow:
-    0.02em 0.02em 0 rgba(201, 162, 39, 0.35),
-    -0.02em -0.01em 0 rgba(15, 92, 74, 0.2);
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-rise {
+  .reveal {
     animation: none;
     opacity: 1;
     transform: none;
@@ -153,7 +132,7 @@ body {
   .skip-link {
     transition: none;
   }
-  .card-frida:hover {
-    animation: none;
+  .project-card {
+    transition: none;
   }
 }
