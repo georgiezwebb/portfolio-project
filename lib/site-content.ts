@@ -71,6 +71,7 @@ export const projects: Project[] = [
       "A copy shelf for freelancers. Organise marketing text by type, keep versions, and get optional AI prompts.",
     tags: ["Next.js", "Vercel"],
     href: "https://freelancer-marketing-tool.vercel.app/",
+    repo: "https://github.com/georgiezwebb/freelancer-marketing-tool",
     year: "2026",
     image: "/projects/pitchkit.jpg",
     imageAlt: "PitchKit copy library showing marketing stack folders and outreach message editor",
