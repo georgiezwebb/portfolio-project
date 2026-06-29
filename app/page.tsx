@@ -148,7 +148,7 @@ export default function Home() {
               Contact
             </h2>
             <p className="mt-4 max-w-md text-[var(--muted)]">
-              Send me a message, I'm happy to chat about roles, freelance work, or a project you&apos;re working on in a 15 minute call, free of charge.
+              Send me a message, I'm happy to chat about roles, freelance work, or a project you&apos;re working on in a 15 minute call.
             </p>
             <ul className="mt-8 flex flex-wrap gap-4">
               {contactLinks.length > 0 ? (
