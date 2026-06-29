@@ -24,12 +24,12 @@ const mono = IBM_Plex_Mono({
 
 const siteUrl = getSiteUrl();
 
-const description = `${site.name} — ${site.role}. Portfolio and selected projects.`;
+const description = `${site.name} — ${site.tagline} Portfolio and selected projects.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name} · ${site.role}`,
+    default: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
     template: `%s · ${site.name}`,
   },
   description,
@@ -39,12 +39,12 @@ export const metadata: Metadata = {
     locale: "en_GB",
     url: siteUrl,
     siteName: `${site.name} — Portfolio`,
-    title: `${site.name} · ${site.role}`,
+    title: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
     description,
   },
   twitter: {
     card: "summary",
-    title: `${site.name} · ${site.role}`,
+    title: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
     description,
   },
   robots: { index: true, follow: true },
@@ -68,7 +68,7 @@ const jsonLd = {
       "@id": `${siteUrl}/#person`,
       name: site.name,
       url: siteUrl,
-      jobTitle: site.role,
+      jobTitle: site.tagline.replace(/\.$/, ""),
       sameAs: [site.linkedIn, ...(site.github ? [site.github] : [])].filter(Boolean),
     },
     {

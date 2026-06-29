@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import type { Project } from "@/lib/site-content";
 
@@ -57,13 +58,19 @@ function ProjectImage({ project, live }: { project: Project; live: boolean }) {
 function ProjectLinks({ project }: { project: Project }) {
   const live = isLiveLink(project.href);
   const repo = isLiveLink(project.repo);
+  const hasCaseStudy = Boolean(project.slug);
 
-  if (!live && !repo) {
+  if (!live && !repo && !hasCaseStudy) {
     return <p className="text-sm text-[var(--muted)]">Link coming soon</p>;
   }
 
   return (
     <div className="flex flex-wrap gap-x-5 gap-y-2">
+      {hasCaseStudy ? (
+        <Link href={`/work/${project.slug}`} className={linkClass}>
+          More info
+        </Link>
+      ) : null}
       {live ? (
         <a href={project.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
           Live site
