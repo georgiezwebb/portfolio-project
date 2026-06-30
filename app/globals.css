@@ -63,12 +63,22 @@ body {
 
 .hero-visual {
   position: relative;
-  width: min(28rem, 58vw);
-  height: min(30rem, 62vw);
+  width: min(24rem, 58vw);
+  height: min(26rem, 62vw);
   margin-inline: auto;
   margin-top: 0;
-  padding-top: 1rem;
+  padding-top: 0.75rem;
   flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .hero-visual {
+    width: min(28rem, 34vw);
+    height: min(30rem, 36vw);
+    margin-inline: 0 -2rem;
+    margin-top: 0;
+    padding-top: 1.25rem;
+  }
 }
 
 .hero-mark {
@@ -92,7 +102,6 @@ body {
   z-index: 2;
   width: 106%;
   height: 118%;
-  margin: 0;
   border-radius: 48% 52% 44% 56% / 58% 58% 42% 42%;
   border: 3px solid var(--surface);
   background: linear-gradient(
@@ -115,36 +124,6 @@ body {
   align-items: center;
   justify-content: center;
   transform: rotate(24deg) scale(1.08);
-}
-
-.hero-headshot:not(:has(img)) .hero-headshot-inner::after {
-  content: "";
-  position: absolute;
-  inset: 14%;
-  border-radius: 48% 52% 44% 56% / 58% 58% 42% 42%;
-  border: 1px solid rgba(28, 21, 36, 0.08);
-  pointer-events: none;
-}
-
-.hero-headshot:has(img) .hero-headshot-inner {
-  background: var(--paper);
-}
-
-.hero-portrait {
-  position: absolute;
-  top: -10%;
-  right: -8%;
-  bottom: 20%;
-  left: -8%;
-  z-index: 10;
-  overflow: hidden;
-  pointer-events: none;
-  /* Bottom curve — matches the top egg (.hero-mark) */
-  border-radius: 0 0 55% 45% / 0 0 58% 52%;
-}
-
-.hero-portrait img {
-  opacity: 0.76;
 }
 
 @keyframes fade-up {
