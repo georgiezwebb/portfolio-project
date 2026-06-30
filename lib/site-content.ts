@@ -8,7 +8,9 @@ export const site = {
   phone: "07817 449207",
   linkedIn: "https://www.linkedin.com/in/georgie-webb-0106a254/",
   github: "https://github.com/georgiezwebb",
-  /** Path under /public when ready, e.g. "/headshot.jpg" */
+  /** Hero portrait layered over the egg shapes */
+  heroPortrait: "/hero-portrait.png",
+  /** Optional photo inside the hero frame, e.g. "/headshot.jpg" */
   headshot: "",
 } as const;
 
