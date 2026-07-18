@@ -34,6 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 1,
     },
+    {
+      url: `${base}/app-build`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
     ...thinkingPages,
     ...caseStudyPages,
   ];

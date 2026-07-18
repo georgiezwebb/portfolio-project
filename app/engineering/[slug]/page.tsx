@@ -31,9 +31,6 @@ export default async function EngineeringArticlePage({ params }: PageProps) {
 
   return (
     <>
-      <a href="#main" className="skip-link">
-        Skip to content
-      </a>
       <SiteHeader />
       <main id="main" className="px-6 py-12 sm:py-16">
         <article className="mx-auto max-w-3xl">
