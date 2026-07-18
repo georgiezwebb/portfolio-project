@@ -1,8 +1,20 @@
+import Link from "next/link";
+import Image from "next/image";
 import { ProjectCard } from "@/components/project-card";
 import { HeroPortrait } from "@/components/hero-portrait";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { about, projects, site } from "@/lib/site-content";
+import {
+  about,
+  capabilities,
+  credentials,
+  engineeringStandards,
+  problemsISolve,
+  projects,
+  site,
+  techStack,
+} from "@/lib/site-content";
+import { thinkingArticles } from "@/lib/thinking";
 
 export default function Home() {
   const contactLinks = [
@@ -40,40 +52,24 @@ export default function Home() {
         >
           <div className="relative mx-auto grid max-w-5xl items-start gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-6">
             <div>
-              <h1
-                id="hero-heading"
-                className="font-display reveal reveal-2 mt-4 max-w-2xl text-5xl font-medium leading-[1.05] text-[var(--ink)] sm:text-6xl"
-              >
-                {site.tagline}
-              </h1>
-              <p className="reveal reveal-1 mt-8 font-mono text-sm uppercase tracking-[0.2em] text-[var(--accent)] sm:mt-12">
+              <p className="reveal reveal-1 font-mono text-sm uppercase tracking-[0.2em] text-[var(--accent)] sm:mt-12">
                 {site.location}
               </p>
-              <p className="reveal reveal-3 mt-6 max-w-lg text-base leading-relaxed text-[var(--muted)]">
-                A few things I&apos;ve built recently. More detail in{" "}
-                <a
-                  href="#about"
-                  className="text-[var(--ink-soft)] underline decoration-[var(--rose)] decoration-2 underline-offset-4 hover:text-[var(--accent)]"
-                >
-                  about
-                </a>{" "}
-                and on{" "}
-                <a
-                  href={site.linkedIn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[var(--ink-soft)] underline decoration-[var(--rose)] decoration-2 underline-offset-4 hover:text-[var(--accent)]"
-                >
-                  LinkedIn
-                </a>
-                .
+              <h1
+                id="hero-heading"
+                className="font-display reveal reveal-2 mt-4 max-w-2xl text-5xl font-medium leading-[1.05] text-[var(--ink)] sm:mt-8 sm:text-6xl"
+              >
+                Software Engineer
+              </h1>
+              <p className="reveal reveal-3 mt-6 max-w-xl text-sm leading-relaxed text-[var(--muted)]">
+                {techStack.join(" · ")}
               </p>
               <div className="reveal reveal-3 mt-10">
                 <a
-                  href="#work"
+                  href="#demonstrations"
                   className="inline-flex items-center justify-center rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-[var(--surface)] transition hover:bg-[var(--plum)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
                 >
-                  See work
+                  See demonstrations
                 </a>
               </div>
             </div>
@@ -86,49 +82,196 @@ export default function Home() {
           aria-labelledby="about-heading"
           className="border-b border-[var(--line)] px-6 py-16 sm:py-24"
         >
-          <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-            <div>
-              <h2
-                id="about-heading"
-                className="font-display text-3xl font-medium text-[var(--ink)] sm:text-4xl"
-              >
-                About
-              </h2>
-            </div>
-            <div className="space-y-5 text-base leading-relaxed text-[var(--muted)]">
-              <p className="text-[var(--ink-soft)]">{about.intro}</p>
-              {about.paragraphs.map((paragraph) => (
-                <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-              ))}
-              <p>
-                {about.closingBefore}
-                <a
-                  href="#contact"
-                  className="font-medium text-[var(--ink-soft)] underline decoration-[var(--rose)] decoration-2 underline-offset-4 hover:text-[var(--accent)]"
-                >
-                  get in touch
-                </a>
-                !
-              </p>
+          <div className="mx-auto max-w-5xl">
+            <h2
+              id="about-heading"
+              className="font-display text-3xl font-medium text-[var(--ink)] sm:text-4xl"
+            >
+              About
+            </h2>
+            <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
+              <ul className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+                {credentials.map((item) => {
+                  const label = "logoAlt" in item && item.logoAlt ? item.logoAlt : item.title;
+
+                  return (
+                  <li
+                    key={item.title}
+                    className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-5"
+                  >
+                    {"logo" in item && item.logo ? (
+                      <Image
+                        src={item.logo}
+                        alt={label}
+                        width={"logoWidth" in item ? item.logoWidth : 112}
+                        height={"logoHeight" in item ? item.logoHeight : 32}
+                        className="h-8 w-auto max-w-full"
+                        unoptimized
+                      />
+                    ) : (
+                      <p className="font-display text-2xl font-medium text-[var(--ink)]">
+                        {item.title}
+                      </p>
+                    )}
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
+                      {item.description}
+                    </p>
+                  </li>
+                  );
+                })}
+              </ul>
+              <div className="space-y-5 text-base leading-relaxed text-[var(--muted)]">
+                <p className="text-[var(--ink-soft)]">{about.intro}</p>
+                {about.paragraphs.map((paragraph) => (
+                  <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+                ))}
+                <p>
+                  {about.closingBefore}
+                  <a
+                    href="#contact"
+                    className="font-medium text-[var(--ink-soft)] underline decoration-[var(--rose)] decoration-2 underline-offset-4 hover:text-[var(--accent)]"
+                  >
+                    get in touch
+                  </a>
+                  .
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="work" aria-labelledby="work-heading" className="px-6 py-16 sm:py-24">
+        <section
+          id="problems"
+          aria-labelledby="problems-heading"
+          className="border-b border-[var(--line)] px-6 py-16 sm:py-24"
+        >
           <div className="mx-auto max-w-5xl">
             <h2
-              id="work-heading"
+              id="problems-heading"
               className="font-display text-3xl font-medium text-[var(--ink)] sm:text-4xl"
             >
-              Selected work
+              Problems I solve
+            </h2>
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+              {problemsISolve.map((problem) => (
+                <li
+                  key={problem}
+                  className="rounded-2xl border border-[var(--line)] bg-[var(--surface)] px-6 py-5 text-base leading-relaxed text-[var(--ink-soft)]"
+                >
+                  {problem}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section
+          id="demonstrations"
+          aria-labelledby="demonstrations-heading"
+          className="border-b border-[var(--line)] px-6 py-16 sm:py-24"
+        >
+          <div className="mx-auto max-w-5xl">
+            <h2
+              id="demonstrations-heading"
+              className="font-display text-3xl font-medium text-[var(--ink)] sm:text-4xl"
+            >
+              Engineering demonstrations
             </h2>
             <p className="mt-3 max-w-xl text-[var(--muted)]">
-              Demos and repos open in a new tab when available.
+              A few things I&apos;ve built recently.
             </p>
-            <ul className="mt-12 grid list-none gap-6 sm:grid-cols-2 sm:items-stretch">
+            <ul className="mt-12 flex list-none flex-col gap-6">
               {projects.map((project) => (
-                <li key={project.title} className="h-full">
+                <li key={project.title}>
                   <ProjectCard project={project} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section
+          id="capabilities"
+          aria-labelledby="capabilities-heading"
+          className="border-b border-[var(--line)] px-6 py-16 sm:py-24"
+        >
+          <div className="mx-auto max-w-5xl">
+            <h2
+              id="capabilities-heading"
+              className="font-display text-3xl font-medium text-[var(--ink)] sm:text-4xl"
+            >
+              Things I build
+            </h2>
+            <ul className="mt-10 flex flex-wrap gap-3">
+              {capabilities.map((item) => (
+                <li key={item}>
+                  <span className="inline-block rounded-full border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--ink-soft)]">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section
+          id="standards"
+          aria-labelledby="standards-heading"
+          className="border-b border-[var(--line)] px-6 py-16 sm:py-24"
+        >
+          <div className="mx-auto max-w-5xl">
+            <h2
+              id="standards-heading"
+              className="font-display text-3xl font-medium text-[var(--ink)] sm:text-4xl"
+            >
+              Every project includes
+            </h2>
+            <ul className="mt-10 grid gap-3 sm:grid-cols-2">
+              {engineeringStandards.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-3 rounded-xl border border-[var(--line)] bg-[var(--surface)] px-5 py-4 text-sm text-[var(--ink-soft)]"
+                >
+                  <span className="text-[var(--accent)]" aria-hidden="true">
+                    ✓
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section
+          id="engineering"
+          aria-labelledby="engineering-heading"
+          className="border-b border-[var(--line)] px-6 py-16 sm:py-24"
+        >
+          <div className="mx-auto max-w-5xl">
+            <h2
+              id="engineering-heading"
+              className="font-display text-3xl font-medium text-[var(--ink)] sm:text-4xl"
+            >
+              Engineering
+            </h2>
+            <p className="mt-3 max-w-xl text-[var(--muted)]">
+              Notes on how I&apos;d approach the kind of work agencies bring in.
+            </p>
+            <ul className="mt-10 grid gap-4 sm:grid-cols-2">
+              {thinkingArticles.map((article) => (
+                <li key={article.slug}>
+                  <Link
+                    href={`/engineering/${article.slug}`}
+                    className="group flex h-full flex-col rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 transition hover:-translate-y-0.5 hover:border-[var(--accent-dim)]"
+                  >
+                    <h3 className="font-display text-xl font-medium text-[var(--ink)] group-hover:text-[var(--accent)]">
+                      {article.title}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-relaxed text-[var(--muted)]">
+                      {article.summary}
+                    </p>
+                    <span className="mt-4 text-sm font-medium text-[var(--accent)]">Read →</span>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -138,7 +281,7 @@ export default function Home() {
         <section
           id="contact"
           aria-labelledby="contact-heading"
-          className="border-t border-[var(--line)] px-6 py-16 sm:py-24"
+          className="px-6 py-16 sm:py-24"
         >
           <div className="mx-auto max-w-5xl">
             <h2
@@ -148,7 +291,8 @@ export default function Home() {
               Contact
             </h2>
             <p className="mt-4 max-w-md text-[var(--muted)]">
-              Send me a message, I'm happy to chat about roles, freelance work, or a project you&apos;re working on in a 15 minute call.
+              Happy to chat about freelance work, a rescue job, or covering capacity for a few
+              weeks. A 15-minute call is a good place to start.
             </p>
             <ul className="mt-8 flex flex-wrap gap-4">
               {contactLinks.length > 0 ? (

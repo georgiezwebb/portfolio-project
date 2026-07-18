@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Outfit, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { getSiteUrl } from "@/lib/site";
-import { site, projects } from "@/lib/site-content";
+import { positioning, site, projects } from "@/lib/site-content";
 
 const display = Cormorant_Garamond({
   variable: "--font-display",
@@ -24,12 +24,12 @@ const mono = IBM_Plex_Mono({
 
 const siteUrl = getSiteUrl();
 
-const description = `${site.name} — ${site.tagline} Portfolio and selected projects.`;
+const description = `${site.name}, ${site.role.toLowerCase()}. ${positioning.statement}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
+    default: `${site.name} · ${site.role}`,
     template: `%s · ${site.name}`,
   },
   description,
@@ -38,13 +38,13 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_GB",
     url: siteUrl,
-    siteName: `${site.name} — Portfolio`,
-    title: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
+    siteName: `${site.name} · ${site.role}`,
+    title: `${site.name} · ${site.role}`,
     description,
   },
   twitter: {
     card: "summary",
-    title: `${site.name} · ${site.tagline.replace(/\.$/, "")}`,
+    title: `${site.name} · ${site.role}`,
     description,
   },
   robots: { index: true, follow: true },
@@ -58,7 +58,7 @@ const jsonLd = {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       url: siteUrl,
-      name: `${site.name} — Portfolio`,
+      name: `${site.name} portfolio`,
       description,
       inLanguage: "en-GB",
       publisher: { "@id": `${siteUrl}/#person` },
@@ -68,13 +68,13 @@ const jsonLd = {
       "@id": `${siteUrl}/#person`,
       name: site.name,
       url: siteUrl,
-      jobTitle: site.tagline.replace(/\.$/, ""),
+      jobTitle: site.role,
       sameAs: [site.linkedIn, ...(site.github ? [site.github] : [])].filter(Boolean),
     },
     {
       "@type": "ItemList",
       "@id": `${siteUrl}/#projects`,
-      name: "Selected projects",
+      name: "Engineering demonstrations",
       itemListElement: projects.map((p, i) => ({
         "@type": "ListItem",
         position: i + 1,

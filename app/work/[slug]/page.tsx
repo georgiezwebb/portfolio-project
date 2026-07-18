@@ -39,10 +39,10 @@ export default async function CaseStudyPage({ params }: PageProps) {
       <main id="main" className="px-6 py-12 sm:py-16">
         <article className="mx-auto max-w-3xl">
           <Link
-            href="/#work"
+            href="/#demonstrations"
             className="text-sm text-[var(--muted)] transition hover:text-[var(--accent)]"
           >
-            ← Back to work
+            ← Back to demonstrations
           </Link>
 
           <header className="mt-8">
