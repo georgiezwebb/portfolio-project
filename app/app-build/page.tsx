@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { AppBuildBooking } from "@/components/app-build-booking";
+import { AppBuildMockups } from "@/components/app-build-mockups";
 import {
   appBuild,
   getCalendlyEmbedUrl,
@@ -38,59 +40,65 @@ export default function AppBuildPage() {
 
       <main id="main" className="app-build-page">
         <section className="border-b border-[var(--line)] px-6 py-16 sm:py-24">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">
-              {appBuild.hero.badge}
-            </p>
-            <h1 className="font-display mt-6 text-4xl font-medium leading-[1.08] text-[var(--ink)] sm:text-5xl">
-              {appBuild.hero.headline}
-            </h1>
-            <p className="mt-6 text-lg leading-relaxed text-[var(--muted)]">
-              {appBuild.hero.subhead}
-            </p>
-            <a
-              href="#book"
-              className="mt-10 inline-flex items-center justify-center rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-[var(--surface)] transition hover:bg-[var(--plum)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
-            >
-              {appBuild.hero.cta}
-            </a>
+          <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto]">
+            <div className="text-center lg:text-left">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--accent)]">
+                {appBuild.hero.badge}
+              </p>
+              <h1 className="font-display mt-6 text-4xl font-medium leading-[1.08] text-[var(--ink)] sm:text-5xl">
+                {appBuild.hero.headline}
+              </h1>
+              <p className="mt-6 text-lg leading-relaxed text-[var(--muted)]">
+                {appBuild.hero.subhead}
+              </p>
+              <a
+                href="#book"
+                className="mt-10 inline-flex items-center justify-center rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-[var(--surface)] transition hover:bg-[var(--plum)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]"
+              >
+                {appBuild.hero.cta}
+              </a>
+            </div>
+            <Image
+              src="/headshot.png"
+              alt={`Portrait of ${site.name}`}
+              width={1024}
+              height={1286}
+              className="mx-auto h-auto w-full max-w-[280px] rounded-b-2xl"
+              priority
+            />
           </div>
         </section>
 
         <section className="border-b border-[var(--line)] px-6 py-16 sm:py-20">
-          <div className="mx-auto max-w-5xl lg:grid lg:grid-cols-2 lg:gap-16">
-            <div>
-              <h2 className="font-display text-3xl font-medium text-[var(--ink)]">
-                {appBuild.problems.heading}
-              </h2>
-              <ul className="mt-8 space-y-4">
-                {appBuild.problems.items.map((item) => (
-                  <li
-                    key={item}
-                    className="flex gap-3 text-base leading-relaxed text-[var(--ink-soft)]"
-                  >
-                    <span className="mt-1 text-[var(--accent)]" aria-hidden="true">
-                      ·
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="mt-12 lg:mt-0">
-              <h2 className="font-display text-3xl font-medium text-[var(--ink)]">
-                {appBuild.examples.heading}
-              </h2>
-              <ul className="mt-8 flex flex-wrap gap-3">
-                {appBuild.examples.items.map((item) => (
-                  <li key={item}>
-                    <span className="inline-block rounded-full border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--ink-soft)]">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mx-auto max-w-5xl">
+            <h2 className="font-display text-3xl font-medium text-[var(--ink)]">
+              {appBuild.problems.heading}
+            </h2>
+            <ul className="mt-8 grid gap-4 sm:grid-cols-2">
+              {appBuild.problems.items.map((item) => (
+                <li
+                  key={item}
+                  className="flex gap-3 text-base leading-relaxed text-[var(--ink-soft)]"
+                >
+                  <span className="mt-1 text-[var(--accent)]" aria-hidden="true">
+                    ·
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section className="border-b border-[var(--line)] px-6 py-16 sm:py-20">
+          <div className="mx-auto max-w-5xl">
+            <h2 className="font-display text-3xl font-medium text-[var(--ink)]">
+              {appBuild.mockups.heading}
+            </h2>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-[var(--muted)]">
+              {appBuild.mockups.intro}
+            </p>
+            <AppBuildMockups items={appBuild.mockups.items} />
           </div>
         </section>
 
@@ -141,7 +149,7 @@ export default function AppBuildPage() {
           </div>
         </section>
 
-        <section id="book" aria-labelledby="book-heading" className="px-6 py-16 sm:py-24">
+        <section id="book" aria-labelledby="book-heading" className="px-4 py-16 sm:px-6 sm:py-24">
           <div className="mx-auto max-w-5xl text-center">
             <h2
               id="book-heading"
@@ -154,7 +162,7 @@ export default function AppBuildPage() {
             </p>
           </div>
 
-          <div className="mx-auto mt-10 w-full max-w-[767px] xl:max-w-6xl">
+          <div className="mx-auto mt-10 w-full min-w-0 max-w-[767px] xl:max-w-6xl">
             <AppBuildBooking embedUrl={embedUrl} />
           </div>
         </section>

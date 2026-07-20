@@ -2,74 +2,108 @@
 
 export const appBuild = {
   meta: {
-    title: "Internal app builds for small businesses",
+    title: "Internal applications for local small businesses",
     description:
-      "A fixed-scope app build for small companies. Replace spreadsheets and manual work with a simple internal tool.",
+      "Fixed-scope internal tools for small teams in West London and the surrounding area.",
   },
   hero: {
-    badge: "Limited availability",
-    headline: "An internal app built for your business",
+    badge: "West London",
+    headline: "A practical app for your business",
     subhead:
-      "For a short time I'm taking on fixed-scope builds for useful internal tools that replace spreadsheets, email chains, and workarounds.",
+      "I am a software engineer based in West London. For a limited period I am taking on a small number of local projects building focused internal tools to replace spreadsheets and manual workarounds.",
     cta: "Book a free call",
   },
   problems: {
-    heading: "Sound familiar?",
+    heading: "Does this sound familiar?",
     items: [
-      "Important data lives in spreadsheets that nobody fully trusts",
-      "The team repeats the same manual steps every week",
-      "Customer or job information is spread across email, notes, and forms",
-      "You've outgrown off-the-shelf software but don't need a huge custom project",
+      "Critical information remains in spreadsheets the team does not fully trust",
+      "Staff repeat the same manual steps each week",
+      "Client and job data is scattered across email, notes, and forms",
+      "You need a tailored solution",
     ],
   },
-  examples: {
-    heading: "The kind of thing I build",
+  mockups: {
+    heading: "Typical projects",
+    intro:
+      "The companies below are fictional, these screens show the kind of interface I might build.",
     items: [
-      "Job and project trackers",
-      "Client or customer portals",
-      "Booking and scheduling tools",
-      "Inventory and stock lists",
-      "Staff dashboards and handover notes",
-      "Simple approval workflows",
-      "Replacing a process that currently runs on Excel",
+      {
+        title: "Job tracker",
+        caption:
+          "Example for Walsh & Pike, a plumbing team that wanted one view of the week's jobs.",
+        brand: {
+          name: "Walsh & Pike",
+          tagline: "Plumbing & heating",
+          initials: "WP",
+          accent: "#0d9488",
+        },
+        type: "jobs",
+      },
+      {
+        title: "Client portal",
+        caption:
+          "Example for Linden Row Studio, where clients check visits and documents in one place.",
+        brand: {
+          name: "Linden Row Studio",
+          tagline: "Interior design",
+          initials: "LR",
+          accent: "#c76b8a",
+        },
+        type: "portal",
+      },
+      {
+        title: "Stock list",
+        caption:
+          "Example for Cornerstone Supplies, replacing a shared spreadsheet for van and shelf stock.",
+        brand: {
+          name: "Cornerstone Supplies",
+          tagline: "Trade materials",
+          initials: "CS",
+          accent: "#92670a",
+        },
+        type: "stock",
+      },
     ],
   },
   included: {
-    heading: "What's included",
+    heading: "What is included",
     items: [
-      "A discovery call to agree scope and priorities",
-      "A focused internal web app for your team",
-      "Login and sensible permissions",
-      "A clean interface that works on desktop and mobile",
-      "Handover, documentation, and a short support period after launch",
+      "An initial call to define requirements and priorities",
+      "One focused web application for your team",
+      "Secure login and appropriate access controls",
+      "A responsive interface for desktop and mobile",
+      "Documentation, handover, and post-launch support",
     ],
   },
   process: {
-    heading: "The process",
+    heading: "How it works",
     steps: [
       {
         title: "Book a call",
-        description: "A 30-minute chat to understand what you need and whether I'm a good fit.",
+        description:
+          "A free 30-minute consultation, in person if you are local, otherwise by video call.",
       },
       {
         title: "Agree scope",
-        description: "We define one clear problem, what the app must do, and a fixed price and timeline.",
+        description:
+          "We define a single clear objective, a fixed price, and a realistic delivery timeline.",
       },
       {
         title: "Build and launch",
-        description: "I build the app, keep you updated, and hand it over ready for your team to use.",
+        description:
+          "I develop the application, provide regular updates, and deliver a system ready for your team to use.",
       },
     ],
   },
   booking: {
     heading: "Book a call",
     intro:
-      "Pick a time below for a free 30-minute call. No obligation if it's not the right fit.",
+      "Select a time below. There is no obligation if the project is not the right fit.",
     fallbackEmail: "hello@georgiewebb.co.uk",
   },
   footer: {
     name: "Georgie Webb",
-    role: "Freelance Software Engineer",
+    role: "Brentford · Freelance Software Engineer",
     linkLabel: "Main site",
   },
 } as const;

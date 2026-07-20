@@ -38,10 +38,10 @@ export function AppBuildBooking({ embedUrl }: AppBuildBookingProps) {
 
   if (embedUrl) {
     return (
-      <div className="w-full overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] px-5 pb-10 pt-6 sm:px-6 sm:pb-12 sm:pt-8">
+      <div className="mx-auto w-full min-w-0 overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface)] py-6 sm:px-6 sm:py-8">
         <InlineWidget
           url={embedUrl}
-          styles={{ height: `${height}px`, minWidth: "320px", width: "100%" }}
+          styles={{ height: `${height}px`, minWidth: "0", width: "100%" }}
         />
       </div>
     );

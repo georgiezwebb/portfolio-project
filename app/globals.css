@@ -170,3 +170,13 @@ body {
     transform: none;
   }
 }
+
+.app-build-page .calendly-inline-widget {
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.app-build-page .calendly-inline-widget iframe {
+  display: block;
+  width: 100% !important;
+}
