@@ -111,14 +111,27 @@ export const appBuild = {
 export const calendlyEventUrl =
   "https://calendly.com/georgiezwebb/app-build-meeting" as const;
 
+function parseHttpUrl(value: string): URL | null {
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "http:" && url.protocol !== "https:") return null;
+    return url;
+  } catch {
+    return null;
+  }
+}
+
 export function getCalendlyUrl(): string {
   const url = process.env.NEXT_PUBLIC_CALENDLY_URL?.trim();
-  return url || calendlyEventUrl;
+  if (url && parseHttpUrl(url)) return url;
+  return calendlyEventUrl;
 }
 
 /** Calendly branding to match site colours (hex without #). */
-export function getCalendlyEmbedUrl(baseUrl: string): string {
-  const url = new URL(baseUrl);
+export function getCalendlyEmbedUrl(baseUrl: string): string | null {
+  const url = parseHttpUrl(baseUrl) ?? parseHttpUrl(calendlyEventUrl);
+  if (!url) return null;
+
   url.searchParams.set("hide_gdpr_banner", "1");
   url.searchParams.set("hide_event_type_details", "1");
   url.searchParams.set("hide_landing_page_details", "1");

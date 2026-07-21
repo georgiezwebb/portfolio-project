@@ -22,13 +22,14 @@ export function AppBuildBooking({ embedUrl }: AppBuildBookingProps) {
 
       const data = event.data as {
         event?: string;
-        payload?: { height?: number };
+        payload?: { height?: number | string };
       };
 
-      if (data.event === "calendly.page_height" && data.payload?.height) {
-        setHeight(
-          Math.max(MIN_HEIGHT, Math.ceil(data.payload.height) + HEIGHT_BUFFER),
-        );
+      if (data.event === "calendly.page_height" && data.payload?.height != null) {
+        const parsed = Number.parseFloat(String(data.payload.height));
+        if (!Number.isFinite(parsed)) return;
+
+        setHeight(Math.max(MIN_HEIGHT, Math.ceil(parsed) + HEIGHT_BUFFER));
       }
     };
 
